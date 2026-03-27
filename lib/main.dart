@@ -29,15 +29,26 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 1;
-  String _text = "Genap: ";
+  String _text = "Prima: ";
 
   void _incrementCounter() {
     setState(() {
       _counter++;
 
-      _text = "Genap: ";
-      for (int i = 0; i <= _counter; i++) {
-        if (i % 2 == 0 && i != 0) {
+      _text = "Prima: ";
+      for (int i = 1; i <= _counter; i++) {
+        bool isPrima = false;
+        if (i >= 2) {
+          isPrima = true;
+          for (int j = 2; j <= i ~/ 2; j++) {
+            if (i % j == 0) {
+              isPrima = false;
+              break;
+            }
+          }
+        }
+
+        if (isPrima) {
           _text += '$i, ';
         }
       }
@@ -57,7 +68,7 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: .center,
           children: [
             const Text(
-              'Program untuk menampilkan bilangan genap kelipatan 2 mulai dari 1 sampai n: ',
+              'Program untuk menampilkan bilangan prima mulai dari 1 sampai n: ',
             ),
             Text(
               '$_counter',
