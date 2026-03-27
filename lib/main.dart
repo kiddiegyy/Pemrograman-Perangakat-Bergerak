@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(const MyApp());
@@ -7,70 +8,87 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.deepPurple)),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      title: 'Contacts',
+      theme: ThemeData(),
+      home: const DetailScreen(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 1;
-  String _text = "Genap: ";
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-
-      _text = "Genap: ";
-      for (int i = 0; i <= _counter; i++) {
-        if (i % 2 == 0 && i != 0) {
-          _text += '$i, ';
-        }
-      }
-    });
-  }
+class DetailScreen extends StatelessWidget {
+  const DetailScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-
-        title: Text(widget.title),
-      ),
-      body: Center(
+      body: SafeArea(
         child: Column(
-          mainAxisAlignment: .center,
           children: [
-            const Text(
-              'Program untuk menampilkan bilangan genap kelipatan 2 mulai dari 1 sampai n: ',
+            Image.asset("assets/images/monkasel.jpg"),
+            Container(
+              margin: EdgeInsets.only(top: 16),
+              child: Text(
+                "Surabaya Submarine Monument",
+                textAlign: TextAlign.center,
+                style: GoogleFonts.montserrat(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
+            Container(
+              margin: EdgeInsets.symmetric(vertical: 16),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Column(
+                    children: const [
+                      Icon(Icons.calendar_today),
+                      Text('Open Everyday'),
+                    ],
+                  ),
+                ],
+              ),
             ),
-            Text(_text, style: Theme.of(context).textTheme.headlineMedium),
+            Container(
+              padding: const EdgeInsets.all(16),
+              child: Text(
+                'The Surabaya Submarine Monument (Monkasel) is a unique historical attraction in Surabaya, Indonesia, featuring a real submarine called KRI Pasopati 410 that once served in the Indonesian Navy. Located in the city center, this monument allows visitors to explore the inside of the submarine and see important areas such as the control room, crew quarters, and torpedo section. It provides a clear and educational insight into naval history and the life of sailors, making it an interesting place for both tourists and students.',
+                textAlign: TextAlign.center,
+                style: GoogleFonts.lato(fontSize: 16),
+              ),
+            ),
+            Container(
+              height: 150,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(4),
+                    child: Image.network(
+                      "https://media-cdn.tripadvisor.com/media/photo-m/1280/16/a9/33/43/liburan-di-farmhouse.jpg",
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(4),
+                    child: Image.asset("assets/images/monkasel1.jpg"),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(4),
+                    child: Image.asset("assets/images/monkasel2.jpg"),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(4),
+                    child: Image.asset("assets/images/monkasel3.jpg"),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
       ),
     );
   }
